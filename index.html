@@ -40,24 +40,33 @@
 
     input {
       padding: 8px;
-      width: 70%;
-      border: 1px solid #ccc;
       border-radius: 6px;
-      margin-top: 10px;
+      border: 1px solid #ccc;
+      margin-top: 8px;
+      width: 60%;
     }
 
     button {
       padding: 8px 10px;
+      margin-top: 8px;
+      margin-left: 5px;
       border: none;
+      border-radius: 6px;
       background: #2d6cdf;
       color: white;
-      border-radius: 6px;
       cursor: pointer;
-      margin-left: 5px;
     }
 
     button:hover {
       background: #1b4fa8;
+    }
+
+    .remove {
+      background: #e74c3c;
+    }
+
+    .remove:hover {
+      background: #c0392b;
     }
 
     ul {
@@ -68,12 +77,10 @@
       margin: 6px 0;
     }
 
-    .removeBtn {
-      background: #ff4d4d;
-    }
-
-    .removeBtn:hover {
-      background: #cc0000;
+    .codeBox {
+      font-size: 18px;
+      font-weight: bold;
+      color: #2d6cdf;
     }
   </style>
 </head>
@@ -84,23 +91,51 @@
 
 <div class="container">
 
+  <!-- TEACHER ROOM -->
   <div class="card">
-    <h2>Announcements</h2>
-    <p>Welcome to your classroom website.</p>
+    <h2>Teacher Room</h2>
+    <p>Create a class code:</p>
+
+    <button onclick="createRoom()">Create Room Code</button>
+    <p class="codeBox" id="roomCode">No room created</p>
   </div>
 
+  <!-- STUDENT JOIN -->
+  <div class="card">
+    <h2>Join Class</h2>
+
+    <input id="joinInput" placeholder="Enter room code">
+    <button onclick="joinRoom()">Join</button>
+
+    <p id="joinStatus"></p>
+  </div>
+
+  <!-- ANNOUNCEMENTS -->
+  <div class="card">
+    <h2>Announcements</h2>
+    <p>Welcome to ClassClassroom.</p>
+  </div>
+
+  <!-- ASSIGNMENTS -->
   <div class="card">
     <h2>Assignments</h2>
 
     <ul id="taskList">
-      <li>Math homework <button class="removeBtn" onclick="removeTask(this)">Remove</button></li>
-      <li>Reading task <button class="removeBtn" onclick="removeTask(this)">Remove</button></li>
+      <li>
+        Math homework
+        <button class="remove" onclick="removeTask(this)">Remove</button>
+      </li>
+      <li>
+        Reading task
+        <button class="remove" onclick="removeTask(this)">Remove</button>
+      </li>
     </ul>
 
-    <input id="taskInput" placeholder="Enter new assignment">
+    <input id="taskInput" placeholder="New assignment">
     <button onclick="addTask()">Add</button>
   </div>
 
+  <!-- RESOURCES -->
   <div class="card">
     <h2>Resources</h2>
     <ul>
@@ -112,6 +147,24 @@
 </div>
 
 <script>
+let currentRoom = "";
+
+function createRoom() {
+  currentRoom = Math.random().toString(36).substring(2, 8).toUpperCase();
+  document.getElementById("roomCode").innerText = "Room Code: " + currentRoom;
+}
+
+function joinRoom() {
+  const input = document.getElementById("joinInput").value;
+  const status = document.getElementById("joinStatus");
+
+  if (input === currentRoom && currentRoom !== "") {
+    status.innerText = "Joined class successfully!";
+  } else {
+    status.innerText = "Invalid room code";
+  }
+}
+
 function addTask() {
   const input = document.getElementById("taskInput");
   const list = document.getElementById("taskList");
@@ -119,7 +172,7 @@ function addTask() {
   if (input.value.trim() === "") return;
 
   const item = document.createElement("li");
-  item.innerHTML = input.value + ' <button class="removeBtn" onclick="removeTask(this)">Remove</button>';
+  item.innerHTML = input.value + ' <button class="remove" onclick="removeTask(this)">Remove</button>';
 
   list.appendChild(item);
   input.value = "";
