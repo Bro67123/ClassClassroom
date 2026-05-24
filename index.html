@@ -34,4 +34,86 @@
     }
 
     h2 {
-      margin-top: 
+      margin-top: 0;
+      color: #2d6cdf;
+    }
+
+    button {
+      margin-top: 10px;
+      padding: 6px 10px;
+      border: none;
+      background: #2d6cdf;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1b4fa8;
+    }
+
+    ul li {
+      margin: 6px 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>ClassClassroom</header>
+
+<div class="container">
+
+  <div class="card">
+    <h2>Announcements</h2>
+    <p>Welcome to the class website.</p>
+  </div>
+
+  <div class="card">
+    <h2>Assignments</h2>
+
+    <ul id="taskList">
+      <li>
+        Math homework
+        <button onclick="removeTask(this)">Remove</button>
+      </li>
+
+      <li>
+        Reading task
+        <button onclick="removeTask(this)">Remove</button>
+      </li>
+    </ul>
+
+    <button onclick="addTask()">Add new task</button>
+  </div>
+
+  <div class="card">
+    <h2>Resources</h2>
+    <ul>
+      <li>Notes</li>
+      <li>Videos</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+function addTask() {
+  const list = document.getElementById("taskList");
+
+  const item = document.createElement("li");
+  item.innerHTML = `
+    New assignment
+    <button onclick="removeTask(this)">Remove</button>
+  `;
+
+  list.appendChild(item);
+}
+
+function removeTask(button) {
+  button.parentElement.remove();
+}
+</script>
+
+</body>
+</html>
