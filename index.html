@@ -51,11 +51,12 @@
     </div>
 
     <div class="card">
-      <h2>Assignments</h2>
-      <ul>
-        <li>Math homework</li>
-        <li>Reading task</li>
-      </ul>
+ <ul id="taskList">
+  <li>Math homework</li>
+  <li>Reading task</li>
+</ul>
+
+<button onclick="addTask()">Add new task</button>
     </div>
 
     <div class="card">
@@ -67,6 +68,13 @@
     </div>
 
   </div>
-
+<script>
+function addTask() {
+  const list = document.getElementById("taskList");
+  const item = document.createElement("li");
+  item.textContent = "New assignment";
+  list.appendChild(item);
+}
+</script>
 </body>
 </html>
