@@ -52,7 +52,11 @@
       background: #1b4fa8;
     }
 
-    ul li {
+    ul {
+      padding-left: 20px;
+    }
+
+    li {
       margin: 6px 0;
     }
   </style>
@@ -66,22 +70,15 @@
 
   <div class="card">
     <h2>Announcements</h2>
-    <p>Welcome to the class website.</p>
+    <p>Welcome to your classroom website.</p>
   </div>
 
   <div class="card">
     <h2>Assignments</h2>
 
     <ul id="taskList">
-      <li>
-        Math homework
-        <button onclick="removeTask(this)">Remove</button>
-      </li>
-
-      <li>
-        Reading task
-        <button onclick="removeTask(this)">Remove</button>
-      </li>
+      <li>Math homework <button onclick="removeTask(this)">Remove</button></li>
+      <li>Reading task <button onclick="removeTask(this)">Remove</button></li>
     </ul>
 
     <button onclick="addTask()">Add new task</button>
@@ -102,10 +99,7 @@ function addTask() {
   const list = document.getElementById("taskList");
 
   const item = document.createElement("li");
-  item.innerHTML = `
-    New assignment
-    <button onclick="removeTask(this)">Remove</button>
-  `;
+  item.innerHTML = 'New assignment <button onclick="removeTask(this)">Remove</button>';
 
   list.appendChild(item);
 }
