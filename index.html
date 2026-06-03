@@ -1,187 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ClassClassroom</title>
-
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #eef2f7;
-    }
-
-    header {
-      background: #2d6cdf;
-      color: white;
-      padding: 20px;
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 20px auto;
-      padding: 10px;
-    }
-
-    .card {
-      background: white;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    h2 {
-      margin-top: 0;
-      color: #2d6cdf;
-    }
-
-    input {
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      margin-top: 8px;
-      width: 60%;
-    }
-
-    button {
-      padding: 8px 10px;
-      margin-top: 8px;
-      margin-left: 5px;
-      border: none;
-      border-radius: 6px;
-      background: #2d6cdf;
-      color: white;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #1b4fa8;
-    }
-
-    .remove {
-      background: #e74c3c;
-    }
-
-    .remove:hover {
-      background: #c0392b;
-    }
-
-    ul {
-      padding-left: 20px;
-    }
-
-    li {
-      margin: 6px 0;
-    }
-
-    .codeBox {
-      font-size: 18px;
-      font-weight: bold;
-      color: #2d6cdf;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <title>Classroom Hub</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<header>ClassClassroom</header>
+  <div class="container">
 
-<div class="container">
+    <h1>📚 Classroom Hub</h1>
 
-  <!-- TEACHER ROOM -->
-  <div class="card">
-    <h2>Teacher Room</h2>
-    <p>Create a class code:</p>
+    <button id="login">Sign in with Google</button>
+    <button id="logout" style="display:none;">Logout</button>
 
-    <button onclick="createRoom()">Create Room Code</button>
-    <p class="codeBox" id="roomCode">No room created</p>
+    <div id="status">Not signed in</div>
+
+    <div id="teacherPanel" class="hidden">
+      <h2>Teacher Dashboard</h2>
+      <button>Create Room</button>
+      <button>Upload Resource</button>
+    </div>
+
+    <div id="studentPanel" class="hidden">
+      <h2>Student View</h2>
+      <p>You can view content only.</p>
+    </div>
+
   </div>
 
-  <!-- STUDENT JOIN -->
-  <div class="card">
-    <h2>Join Class</h2>
-
-    <input id="joinInput" placeholder="Enter room code">
-    <button onclick="joinRoom()">Join</button>
-
-    <p id="joinStatus"></p>
-  </div>
-
-  <!-- ANNOUNCEMENTS -->
-  <div class="card">
-    <h2>Announcements</h2>
-    <p>Welcome to ClassClassroom.</p>
-  </div>
-
-  <!-- ASSIGNMENTS -->
-  <div class="card">
-    <h2>Assignments</h2>
-
-    <ul id="taskList">
-      <li>
-        Math homework
-        <button class="remove" onclick="removeTask(this)">Remove</button>
-      </li>
-      <li>
-        Reading task
-        <button class="remove" onclick="removeTask(this)">Remove</button>
-      </li>
-    </ul>
-
-    <input id="taskInput" placeholder="New assignment">
-    <button onclick="addTask()">Add</button>
-  </div>
-
-  <!-- RESOURCES -->
-  <div class="card">
-    <h2>Resources</h2>
-    <ul>
-      <li>Notes</li>
-      <li>Videos</li>
-    </ul>
-  </div>
-
-</div>
-
-<script>
-let currentRoom = "";
-
-function createRoom() {
-  currentRoom = Math.random().toString(36).substring(2, 8).toUpperCase();
-  document.getElementById("roomCode").innerText = "Room Code: " + currentRoom;
-}
-
-function joinRoom() {
-  const input = document.getElementById("joinInput").value;
-  const status = document.getElementById("joinStatus");
-
-  if (input === currentRoom && currentRoom !== "") {
-    status.innerText = "Joined class successfully!";
-  } else {
-    status.innerText = "Invalid room code";
-  }
-}
-
-function addTask() {
-  const input = document.getElementById("taskInput");
-  const list = document.getElementById("taskList");
-
-  if (input.value.trim() === "") return;
-
-  const item = document.createElement("li");
-  item.innerHTML = input.value + ' <button class="remove" onclick="removeTask(this)">Remove</button>';
-
-  list.appendChild(item);
-  input.value = "";
-}
-
-function removeTask(button) {
-  button.parentElement.remove();
-}
-</script>
-
+  <script type="module" src="app.js"></script>
 </body>
 </html>
